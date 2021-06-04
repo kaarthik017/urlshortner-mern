@@ -27,7 +27,9 @@ router.post('/shorten', async(req,res)=>{
         try {
             let url = await Url.findOne({longUrl});
             if(url){
-                res.json(url)
+                res.json({
+                    message:"URL Already exists"
+                })
             }else{
                 const shortUrl = baseUrl + '/' + urlCode;
 

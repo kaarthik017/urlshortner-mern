@@ -8,7 +8,6 @@ export default function Urlshortner(){
         event.preventDefault();
         const longUrl = {url}
         axios.post(`/api/url/shorten`,longUrl).then( res => {
-          
           if(res.data.message === "Url Shorten"){
                 axios.post(`/urllist`).then(
                 res => {
@@ -16,6 +15,16 @@ export default function Urlshortner(){
                   setData(url_data)
                 }
               )
+          }else if(res.data.message==="URL Already exists"){
+            axios.post(`/urllist`).then(
+              res => {
+                const url_data = res.data
+                setData(url_data)
+              }
+            )
+            
+            window.alert(" URL Already Exists in the Database");
+           
           }})
     }
 

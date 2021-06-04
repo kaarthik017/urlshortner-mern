@@ -10,24 +10,17 @@ export default function Urlshortner(){
         axios.post(`/api/url/shorten`,longUrl).then( res => {
           
           if(res.data.message === "Url Shorten"){
-           
-      
-            axios.get(`/`)
-            .then(res=>{
-              if(res.data){
-                console.log(res);
-              const url_data = res.data
-              setData(url_data)
-  
-              }
-            })
-          
+                axios.post(`/urllist`).then(
+                res => {
+                  const url_data = res.data
+                  setData(url_data)
+                }
+              )
           }})
-        
     }
 
     let updateClicks = event =>{
-     // event.preventDefault();
+      event.preventDefault();
       let shortUrl = event.currentTarget.textContent;
       let url = {shortUrl}
       axios.post(`/api/url/click`,url)

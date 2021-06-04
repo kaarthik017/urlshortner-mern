@@ -21,12 +21,14 @@ router.get('/:code', async (req,res)=>{
     }
 })
 
-router.get("/",async(req,res)=>{
+router.post("/urllist",async(req,res)=>{
     try{
         const data = await Url.find();
         if(data){
         res.status(200).json(data)
        
+        }else{
+            res.status(400).json("No data found")
         }
     } catch (error){
         console.log(error);
